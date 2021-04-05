@@ -14,45 +14,16 @@ module "jupyterhub-helm" {
   overrides-values = concat(var.jupyterhub-overrides-values, [
     jsonencode({
       hub = {
-        nodeSelector = {
-          "${var.general-node-group.key}" = var.general-node-group.value
-        }
-
-        image = var.jupyterhub-image
-
         services = {
           "dask-gateway" = {
             apiToken = module.dask-gateway-helm.jupyterhub_api_token
           }
         }
       }
-
-      scheduling = {
-        userScheduler = {
-          nodeSelector = {
-            "${var.general-node-group.key}" = var.general-node-group.value
-          }
-        }
-      }
-
-      proxy = {
-        nodeSelector = {
-          "${var.general-node-group.key}" = var.general-node-group.value
-        }
-      }
-
       singleuser = {
-        nodeSelector = {
-          "${var.user-node-group.key}" = var.user-node-group.value
-        }
-
-        image = var.jupyterlab-image
-
         storage = {
-          static = {
-            pvcName = var.home-pvc
-          }
-
+          # I need to keep both values in the extraVolumes list
+          # because this will replace the original list 
           extraVolumes = [
             {
               name = "conda-store"
@@ -65,22 +36,6 @@ module "jupyterhub-helm" {
               configMap = {
                 name = kubernetes_config_map.dask-etc.metadata.0.name
               }
-            }
-          ]
-
-          extraVolumeMounts = [
-            {
-              name      = "conda-store"
-              mountPath = "/home/conda"
-            },
-            {
-              name      = "etc-dask"
-              mountPath = "/etc/dask"
-            },
-            {
-              name      = "home"
-              mountPath = "/home/shared"
-              subPath   = "home/shared"
             }
           ]
         }
@@ -96,7 +51,7 @@ module "dask-gateway-helm" {
 
   namespace = var.namespace
 
-  external_endpoint = "https://${var.external-url}"
+  external_endpoint = "https://${var.endpoint}"
 
   overrides-values = concat(var.dask-gateway-overrides-values, [
     jsonencode({
@@ -187,7 +142,7 @@ resource "kubernetes_ingress" "dask-gateway" {
 
   spec {
     rule {
-      host = var.external-url
+      host = var.endpoint
       http {
         path {
           backend {
@@ -211,7 +166,7 @@ resource "kubernetes_ingress" "dask-gateway" {
 
     tls {
       secret_name = "swunghub-cert"
-      hosts       = [var.external-url]
+      hosts       = [var.endpoint]
     }
   }
 

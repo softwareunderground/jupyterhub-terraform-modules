@@ -18,7 +18,7 @@ variable "conda-store-pvc" {
   type        = string
 }
 
-variable "external-url" {
+variable "endpoint" {
   description = "External url for the JupyterHub cluster"
   type        = string
 }
