@@ -34,7 +34,7 @@ module "jupyterhub-helm" {
             {
               name = "etc-dask"
               configMap = {
-                name = kubernetes_config_map.dask-etc.metadata.0.name
+                name = kubernetes_config_map.etc-dask.metadata.0.name
               }
             }
           ]
@@ -115,9 +115,9 @@ module "dask-gateway-helm" {
   dependencies = concat(var.dependencies, [module.jupyterhub-helm.depended_on])
 }
 
-resource "kubernetes_config_map" "dask-etc" {
+resource "kubernetes_config_map" "etc-dask" {
   metadata {
-    name      = "dask-etc"
+    name      = "etc-dask"
     namespace = var.namespace
   }
 
