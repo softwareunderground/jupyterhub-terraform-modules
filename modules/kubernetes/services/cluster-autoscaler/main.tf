@@ -4,18 +4,13 @@ resource "null_resource" "dependency_getter" {
   }
 }
 
-data "helm_repository" "autoscaler" {
-  name = "stable"
-  url  = "https://charts.helm.sh/stable"
-}
-
 resource "helm_release" "autoscaler" {
   name      = "cluster-autoscaler"
   namespace = var.namespace
 
-  repository = data.helm_repository.autoscaler.metadata[0].name
-  chart      = "stable/cluster-autoscaler"
-  version    = "7.1.0"
+  repository = "https://kubernetes.github.io/autoscaler"
+  chart      = "cluster-autoscaler"
+  version    = "9.11.0"
 
   values = concat([
     jsonencode({

@@ -20,6 +20,22 @@ variable "environments" {
   default     = {}
 }
 
+variable "node-group" {
+  description = "Node key value pair for bound general resources"
+  type = object({
+    key   = string
+    value = string
+  })
+}
+
+variable "conda-store-image" {
+  description = "Conda-store image"
+  type = object({
+    name = string
+    tag  = string
+  })
+}
+
 variable "dependencies" {
   description = "A list of module dependencies to be injected in the module"
   type        = list(any)
