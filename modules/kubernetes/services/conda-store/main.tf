@@ -10,6 +10,8 @@ resource "kubernetes_persistent_volume_claim" "main" {
     namespace = var.namespace
   }
 
+  wait_until_bound = true
+
   spec {
     access_modes = ["ReadWriteOnce"]
     resources {
@@ -18,6 +20,7 @@ resource "kubernetes_persistent_volume_claim" "main" {
       }
     }
   }
+
   depends_on = [
     null_resource.dependency_getter
   ]
@@ -49,6 +52,7 @@ resource "kubernetes_service" "main" {
       port = 111
     }
   }
+
   depends_on = [
     null_resource.dependency_getter
   ]
@@ -81,9 +85,25 @@ resource "kubernetes_deployment" "main" {
       }
 
       spec {
+        affinity {
+          node_affinity {
+            required_during_scheduling_ignored_during_execution {
+              node_selector_term {
+                match_expressions {
+                  key      = var.node-group.key
+                  operator = "In"
+                  values = [
+                    var.node-group.value
+                  ]
+                }
+              }
+            }
+          }
+        }
+
         container {
           name  = "conda-store"
-          image = "quansight/conda-store:e2051a36e60bd3abd9aa44105f240b359ee6bab7"
+          image = "${var.conda-store-image.name}:${var.conda-store-image.tag}"
 
           command = [
             "python", "/opt/conda-store/conda-store.py",

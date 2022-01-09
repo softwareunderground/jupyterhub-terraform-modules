@@ -37,6 +37,12 @@ variable "vpc_cidr_block" {
   type        = string
 }
 
+variable "vpc_cidr_newbits" {
+  description = "VPC cidr number of bits to support 2^N subnets"
+  type        = number
+  default     = 2
+}
+
 variable "dependencies" {
   description = "A list of module dependencies to be injected in the module"
   type        = list(any)

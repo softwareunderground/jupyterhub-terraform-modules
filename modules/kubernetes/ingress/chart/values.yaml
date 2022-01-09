@@ -4,5 +4,5 @@ cert-manager:
     defaultIssuerKind: ClusterIssuer
 
 clusterissuer:
-  email: costrouchov@quansight.com
+  email: cloud@softwareunderground.org
   server: https://acme-v02.api.letsencrypt.org/directory
