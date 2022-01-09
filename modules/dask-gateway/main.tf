@@ -23,9 +23,9 @@ resource "helm_release" "dask-gateway" {
   name      = var.name
   namespace = var.namespace
 
-  repository = "https://dask.org/dask-gateway-helm-repo/"
+  repository = "https://helm.dask.org/"
   chart      = "dask-gateway"
-  version    = "0.6.1"
+  version    = "0.9.0"
 
   values = concat([
     file("${path.module}/values.yaml")
