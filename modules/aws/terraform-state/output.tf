@@ -5,3 +5,4 @@ output "credentials" {
     dynamo_arn = aws_dynamodb_table.terraform-state-lock.arn
   }
 }
+

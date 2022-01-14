@@ -25,7 +25,7 @@ resource "helm_release" "dask-gateway" {
 
   repository = "https://helm.dask.org/"
   chart      = "dask-gateway"
-  version    = "0.9.0"
+  version    = var.dask_gateway_helm_chart_version
 
   values = concat([
     file("${path.module}/values.yaml")
@@ -55,3 +55,4 @@ resource "null_resource" "dependency_setter" {
     # List resource(s) that will be constructed last within the module.
   ]
 }
+

@@ -24,3 +24,4 @@ variable "efs_security_groups" {
   description = "AWS security groups"
   type        = list(string)
 }
+

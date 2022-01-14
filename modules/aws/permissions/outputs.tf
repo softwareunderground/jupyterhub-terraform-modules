@@ -9,3 +9,4 @@ output "credentials" {
     allowed_resources = var.allowed_policy_resources
   }
 }
+

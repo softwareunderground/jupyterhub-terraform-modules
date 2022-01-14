@@ -7,3 +7,4 @@ output "endpoint_ip" {
   description = "IP Address of conda-store nfs server"
   value       = kubernetes_service.main.spec.0.cluster_ip
 }
+

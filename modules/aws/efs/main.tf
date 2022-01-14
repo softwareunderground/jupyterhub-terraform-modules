@@ -17,3 +17,4 @@ resource "aws_efs_mount_target" "main" {
 
   security_groups = var.efs_security_groups
 }
+

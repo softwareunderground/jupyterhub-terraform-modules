@@ -25,6 +25,5 @@ resource "aws_resourcegroups_group" "main" {
   tags = merge({
     Description = "AWS resources project=${var.project} and environment=${var.environment}"
   }, var.tags)
-
 }
 

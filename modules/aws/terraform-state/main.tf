@@ -23,3 +23,4 @@ resource "aws_dynamodb_table" "terraform-state-lock" {
 
   tags = merge({ Name = "DynamoDB table for locking terraform state store" }, var.tags)
 }
+

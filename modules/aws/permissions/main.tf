@@ -34,3 +34,4 @@ resource "aws_iam_user_policy_attachment" "main" {
   user       = aws_iam_user.main.name
   policy_arn = aws_iam_policy.main.arn
 }
+

@@ -48,6 +48,8 @@ module "jupyterhub-helm" {
 
 module "dask-gateway-helm" {
   source = "/Users/filippo/Work/jupyterhub-terraform-modules/modules/dask-gateway"
+  
+  dask_gateway_helm_chart_version = var.dask_gateway_helm_chart_version
 
   namespace = var.namespace
 
@@ -178,3 +180,4 @@ resource "null_resource" "dependency_setter" {
     # List resource(s) that will be constructed last within the module.
   ]
 }
+

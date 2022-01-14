@@ -14,7 +14,6 @@ resource "kubernetes_persistent_volume_claim" "main" {
   }
 }
 
-
 resource "kubernetes_service" "main" {
   metadata {
     name      = "${var.name}-nfs"

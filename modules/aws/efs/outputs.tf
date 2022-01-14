@@ -4,3 +4,4 @@ output "credentials" {
     dns_name = aws_efs_file_system.main.dns_name
   }
 }
+

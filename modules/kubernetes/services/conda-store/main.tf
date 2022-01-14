@@ -184,3 +184,4 @@ resource "kubernetes_config_map" "conda-environments" {
     null_resource.dependency_getter
   ]
 }
+

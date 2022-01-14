@@ -20,3 +20,4 @@ variable "allowed_policy_resources" {
   type        = list(string)
   default     = []
 }
+

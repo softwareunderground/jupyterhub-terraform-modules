@@ -8,6 +8,11 @@ variable "jupyterhub_helm_chart_version" {
   type        = string
 }
 
+variable "dask_gateway_helm_chart_version" {
+  description = "Dask Gateway Helm chart version"
+  type        = string
+}
+
 variable "home-pvc" {
   description = "Name for persistent volume claim to use for home directory uses /home/{username}"
   type        = string
@@ -87,3 +92,4 @@ variable "dependencies" {
   type        = list(any)
   default     = []
 }
+

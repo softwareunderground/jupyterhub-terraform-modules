@@ -11,3 +11,4 @@ resource "aws_s3_bucket" "main" {
     Description = "S3 bucket for ${var.name}"
   }, var.tags)
 }
+

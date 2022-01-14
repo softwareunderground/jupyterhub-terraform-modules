@@ -4,6 +4,11 @@ variable "name" {
   default     = "dask-gateway"
 }
 
+variable "dask_gateway_helm_chart_version" {
+  description = "Dask Gateway Helm chart version"
+  type        = string
+}
+
 variable "namespace" {
   description = "Namespace for dask-gateway deployment"
   type        = string
@@ -25,3 +30,4 @@ variable "dependencies" {
   type        = list(any)
   default     = []
 }
+

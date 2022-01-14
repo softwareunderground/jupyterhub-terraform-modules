@@ -14,3 +14,4 @@ variable "public" {
   type        = bool
   default     = false
 }
+

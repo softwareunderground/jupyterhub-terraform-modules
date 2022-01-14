@@ -60,3 +60,4 @@ resource "aws_iam_role_policy_attachment" "node-group-policy" {
   policy_arn = local.node_group_policies[count.index]
   role       = aws_iam_role.node-group.name
 }
+
